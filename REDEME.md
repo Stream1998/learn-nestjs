@@ -1,6 +1,6 @@
 # nest.js 从入门到放弃
 
-跟随《Nest通关秘籍》学习记录
+[《Nest通关秘籍》](https://juejin.cn/book/7226988578700525605)学习记录
 
 ## 快速掌握 Nest CLI
 
@@ -29,3 +29,5 @@ nest -h
 - x-www-form-encoded
 - form-data
 - json
+
+## 
