@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<h1>Hello Nestjs</h1>
+	<input type="file" name="" id="fileInput" multiple="multiple" />
+	<script>
+		function urlParam(id) {
+			fetch(`/person/${id}`)
+			.then(res => res.text())
+			.then(res => console.log(res));
+		}
+
+		urlParam(111);
+
+		function query({name, age}) {
+			fetch(`/person/find?name=${name}&age=${age}`)
+				.then(res => res.text())
+				.then(res => console.log(res));
+		}
+
+		query({name: 'lxd', age: 24});
+
+		function formUrlEncoded({name, age}) {
+			fetch('/person', {
+				method: 'POST',
+				body: `name=${name}&age=${age}`,
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				}
+			}).then(res => res.text())
+			.then(res => console.log(res));
+		}
+
+		formUrlEncoded({name: 'lxd', age: 24});
+
+		function json({name, age}) {
+			fetch('/person', {
+				method: 'POST',
+				body: JSON.stringify({name, age}),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+				.then(res => res.json())
+				.then(res => console.log(res));
+		}
+
+		json({ name: 'lxd', age: 24});
+
+		const inputEl = document.querySelector('#fileInput');
+		function formData() {
+			const formData = new FormData();
+			formData.append('name', 'lxd');
+			formData.append('age', 24);
+			formData.append('file1', inputEl.files[0]);
+			formData.append('file2', inputEl.files[1]);
+			fetch('/person/file', {
+				method: "POST",
+				body: formData,
+			})
+				.then(res => res.json())
+				.then(res => console.log(res));
+		}
+		inputEl.addEventListener('change', formData, false);
+	</script>
+</body>
+</html>
